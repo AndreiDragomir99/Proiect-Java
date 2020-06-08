@@ -2,6 +2,7 @@ package View;
 
 import Model.Contact;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -35,6 +36,15 @@ public class Client {
             } catch (Exception e) {
                 System.out.println("Couldnt connect to server...");
                 foundHost = false;
+            }
+        }
+    }
+    public void sendObject(Object object) {
+        if (foundHost) {
+            try {
+                this.objectOutputStream.writeObject(object);
+            } catch (IOException io) {
+                io.printStackTrace();
             }
         }
     }
